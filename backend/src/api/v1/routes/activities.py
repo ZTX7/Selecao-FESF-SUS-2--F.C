@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 from api.v1.dependencies import get_current_user
 from models.models import UsuarioModel, AtividadeModel
 from core.database import get_db
-from schema.db_schema import Atividade, AtividadeResponse
-from crud.activities import criar_atividade, listar_atividades_usuario
+from schemas.db_schema import Atividade, AtividadeResponse
+from repositories.activities_repository import criar_atividade, listar_atividades_usuario
 
 router = APIRouter()
 

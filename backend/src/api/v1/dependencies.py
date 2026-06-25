@@ -10,7 +10,7 @@ from core.database import get_db
 
 security = HTTPBearer()
 
-
+# busca o os dados do usuário em cima do JWT corrente.
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security), 
     db: Session = Depends(get_db)
