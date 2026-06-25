@@ -18,6 +18,111 @@ O **ResiSUS** é uma aplicação web desenvolvida para auxiliar na gestão, acom
 A plataforma permite que residentes registrem suas experiências, atividades desenvolvidas durante a residência, carga horária cumprida e relatórios de acompanhamento, possibilitando uma futura análise e supervisão por tutores, preceptores e responsáveis pelo programa de residência.
 
 O projeto encontra-se em versão **MVP (Minimum Viable Product)**, contemplando atualmente o fluxo principal de solicitação de acesso, autenticação, registro e visualização das atividades realizadas pelos residentes.
+
+
+# 📍Executando o projeto
+
+## Pré-requisitos
+
+Necessário possuir:
+
+* Docker 
+
+---
+
+# 🐳Execução utilizando Docker
+
+O projeto possui ambiente totalmente conteinerizado.
+
+
+
+Serviços:
+
+| Serviço  | Tecnologia | Porta   |
+| -------- | ---------- | ------- |
+| Frontend | Next.js    | 3000    |
+| Backend  | FastAPI    | 8000    |
+| Banco    | PostgreSQL | interno |
+
+Executar:
+
+```bash
+docker compose up --build
+```
+
+Após inicialização:
+
+Frontend: (Aplicação)
+
+```
+http://localhost:3000
+```
+
+Swagger:
+
+```
+http://localhost:8000/docs
+```
+
+# 🌴Variáveis de Ambiente
+
+Criar um arquivo:
+
+```
+.env
+```
+
+Exemplo:
+
+```
+
+
+        # Senha do usuário postgres
+        # Usada pelo container do banco e pelo backend
+        POSTGRES_PASSWORD=password
+
+        PROJECT_NAME=RESISUS API
+        VERSION=1.0.0
+        ENVIRONMENT=development
+
+
+
+        # Chave usada para assinatura dos tokens JWT
+        # Em produção deve ser alterada para uma chave segura
+        SECRET_KEY=minha_chave_super_segura
+
+
+        # Algoritmo utilizado na criação do JWT
+        ALGORITHM=HS256
+
+
+        # Tempo de validade do token em minutos
+        ACCESS_TOKEN_EXPIRE_MINUTES=60
+
+
+        # Dentro do Docker o host é o nome do serviço:
+        # db
+        #
+        # Não usar localhost dentro dos containers
+
+        DATABASE_URL=postgresql://postgres:password@db:5432/resisus_db
+
+
+        # Cria usuário e dados de demonstração automaticamente
+        MOCK_ENABLED=True
+
+
+        NEXT_PUBLIC_API_URL=http://localhost:8000
+
+
+        BACKEND_CORS_ORIGINS=["http://localhost:3000"]
+```
+
+Um arquivo de referência deve ser disponibilizado:
+
+```
+.env.example
+```
 #
 
 ### 👤 Usuário de Demonstração (Mock)
@@ -310,163 +415,5 @@ Frontend envia token nas próximas requisições
 
 ---
 
-# 📍Executando o projeto
 
-## Pré-requisitos
-
-Necessário possuir:
-
-* Git
-* Node.js
-* Python 3.13+
-* Docker (opcional)
-
----
-
-# 🐳Execução utilizando Docker
-
-O projeto possui ambiente totalmente conteinerizado.
-
-
-
-Serviços:
-
-| Serviço  | Tecnologia | Porta   |
-| -------- | ---------- | ------- |
-| Frontend | Next.js    | 3000    |
-| Backend  | FastAPI    | 8000    |
-| Banco    | PostgreSQL | interno |
-
-Executar:
-
-```bash
-docker compose up --build
-```
-
-Após inicialização:
-
-Frontend: (Aplicação)
-
-```
-http://localhost:3000
-```
-
-Swagger:
-
-```
-http://localhost:8000/docs
-```
-
----
-
-# 📍Execução Local
-
-## 📔Backend
-
-Acesse:
-
-```bash
-cd backend/src
-```
-
-Instale as dependências:
-
-```bash
-uv sync
-```
-
-Execute:
-
-```bash
-uv run uvicorn main:app --reload
-```
-
-API disponível:
-
-```
-http://localhost:8000
-```
-
----
-
-## 📘Frontend
-
-Acesse:
-
-```bash
-cd frontend
-```
-
-Instale dependências:
-
-```bash
-npm install
-```
-
-Execute:
-
-```bash
-npm run dev
-```
-
-Aplicação disponível:
-
-```
-http://localhost:3000
-```
-
----
-
-# 🌴Variáveis de Ambiente
-
-Criar um arquivo:
-
-```
-.env
-```
-
-Exemplo:
-
-```
-# APPLICATION
-PROJECT_NAME=RESISUS API
-VERSION=1.0.0
-ENVIRONMENT=development
-
-
-# SECURITY
-SECRET_KEY=your_secret_key_here #Senha para criação de token JWT
-ALGORITHM=HS256 #Tipo de critografia
-ACCESS_TOKEN_EXPIRE_MINUTES=60 #Tempo de Sessão
-
-
-# DATABASE
-DATABASE_URL=postgresql://postgres:password@localhost:5432/resisus_db 
-
-
-# CORS
-BACKEND_CORS_ORIGINS=["http://localhost:3000"]
-```
-
-Um arquivo de referência deve ser disponibilizado:
-
-```
-.env.example
-```
-
-# 🪴Ambientes de execução
-
-Este repositório foi preparado para oferecer duas formas de execução da aplicação, permitindo maior flexibilidade durante a avaliação e utilização do sistema.
-
-A primeira opção utiliza **Docker e Docker Compose**, disponibilizando uma infraestrutura completa contendo:
-
-- Container do Front-End (Next.js);
-- Container da API Backend (FastAPI);
-- Container do banco de dados PostgreSQL.
-
-Essa abordagem permite executar todo o projeto em um ambiente isolado e padronizado, reduzindo problemas relacionados à configuração manual de dependências.
-
-A segunda opção permite a execução de forma **local**, possibilitando que o avaliador execute cada parte do sistema individualmente, instalando as dependências diretamente no ambiente de desenvolvimento.
-
-Dessa forma, fica a critério do avaliador escolher o ambiente mais adequado:
 

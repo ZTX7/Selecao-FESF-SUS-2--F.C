@@ -24,18 +24,23 @@ def run_seed(isEnabled: bool):
         #verifica a integridade do db
         Base.metadata.create_all(bind=engine)
         db = SessionLocal()
-        
+        resident_code = "202629469330"
+        cpf="000.020.000-00"
+        email="residente@teste.com"
+
         try:
             # Verifica se o utilizador teste já existe
-            existing_user = db.query(UsuarioModel).filter(UsuarioModel.email == "residente@teste.com").first()
+            existing_user = db.query(UsuarioModel).filter(UsuarioModel.codigo_residente == resident_code).first()
+            existing_cpf = db.query(UsuarioModel).filter(UsuarioModel.cpf == cpf).first() 
+            existing_email = db.query(UsuarioModel).filter(UsuarioModel.email == email).first() 
             
-            if existing_user:
+            
+            if existing_user or existing_email or existing_cpf:
                 print("✅ Banco já populado. Seed abortado para evitar duplicidade.")
                 return
 
             print("👤 Criando residente de teste...")
             pdf_data = get_pdf_bytes()
-            resident_code = "202629469330"
             
             novo_usuario = UsuarioModel(
                 codigo_residente=resident_code,
