@@ -1,0 +1,28 @@
+#python
+.pytest_cache/
+__pycache__
+pip-cache/
+.cache/
+*.pyc
+*.pyo
+*.pyd
+.Python
+#ambientes virtuais
+env/
+venv/
+.venv/
+.env
+
+#IDE e Git
+.git
+.vscode
+*.md
+
+#Testes
+.coverage
+htmlcov/
+tests/
+#temp
+*.log
+*.tmp
+*.bak
