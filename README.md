@@ -8,7 +8,7 @@
 ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/react-167e8a.svg?style=for-the-badge&logo=react&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-5ba8f5.svg?style=for-the-badge&logo=docker&logoColor=white)
+
 
 
 ## Sobre o projeto
